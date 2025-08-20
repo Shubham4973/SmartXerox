@@ -1,0 +1,11 @@
+<svg width="200" height="60" viewBox="0 0 600 180" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="180" fill="white"></rect>
+  <text x="30" y="120" font-family="Segoe UI, Roboto, sans-serif" font-size="80" font-weight="bold" fill="#0A74DA">
+    Smart
+  </text>
+  <text x="270" y="120" font-family="Segoe UI, Roboto, sans-serif" font-size="80" font-weight="bold" fill="#222">
+    Xerox
+  </text>
+  <rect x="550" y="50" width="20" height="20" fill="#0A74DA" transform="rotate(45 550 50)"></rect>
+  <rect x="560" y="60" width="20" height="20" fill="#0A74DA" transform="rotate(45 560 60)"></rect>
+</svg>

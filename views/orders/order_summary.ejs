@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Order Confirmed - SmartXerox</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/order_summary.css">
+</head>
+
+<body>
+    <div class="summary-box">
+        <h2>Order Confirmed 🎉</h2>
+        <p>Thank you, <%= order.user.username %>!</p>
+        <p>Your document has been submitted successfully.</p>
+
+        <div class="token-box">
+            Token: <%= token.token %>
+        </div>
+
+        <div class="payment-section">
+            <h3>Complete Your Payment</h3>
+            <p>Total Price: ₹<%= order.price %>
+            </p>
+
+            <button class="pay-btn" onclick="showPaymentOptions()">Make Payment</button>
+
+            <div id="paymentOptions" style="display: none; margin-top: 20px;">
+                <!-- Stripe -->
+                <form method="POST" action="/payment/create-checkout-session/<%= order._id %>" style="display:inline;">
+                    <button type="submit" class="pay-option">Pay with Card</button>
+                </form>
+
+                <!-- COD -->
+                <form method="POST" action="/payment/cod/<%= order._id %>" style="display:inline;">
+                    <button type="submit" class="pay-option">Cash on Delivery</button>
+                </form>
+
+            </div>
+        </div>
+
+        <a href="/dashboard" class="btn">Go to Dashboard</a>
+    </div>
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        function showPaymentOptions() {
+            document.getElementById('paymentOptions').style.display = 'block';
+        }
+
+        const stripe = Stripe('<%= process.env.STRIPE_SECRET_KEY%>');
+        const form = document.getElementById("stripeForm");
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const orderId = form.orderId.value;
+
+            const response = await fetch('/create-checkout-session', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ orderId })
+            });
+
+            const session = await response.json();
+            stripe.redirectToCheckout({ sessionId: session.id });
+        });
+    </script>
+</body>
+
+</html>

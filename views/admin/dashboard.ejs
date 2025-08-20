@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SmartXerox Admin Dashboard</title>
+    <link rel="stylesheet" href="/css/admin_dashboard.css">
+</head>
+
+<body>
+    <div class="admin-navbar">
+        <div class="logo-section">
+            <img src="/images/logo.svg" alt="SmartXerox Logo" class="logo">
+            <div class="nav-title">Admin Dashboard</div>
+        </div>
+        <a href="/admin/logout" class="logout-btn">Logout</a>
+    </div>
+
+    <div class="admin-dashboard">
+        <!-- ✅ Orders Table -->
+        <h3>All Orders</h3>
+        <div class="filter-section">
+            <form method="GET" action="/admin/dashboard">
+                <label for="status">Filter by Status:</label>
+                <select name="status" id="status">
+                    <option value="">All</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Processing">Processing</option>
+                    <option value="Printed">Printed</option>
+                    <option value="Dispatched">Dispatched</option>
+                    <option value="Completed">Completed</option>
+                </select>
+                <button type="submit">Apply</button>
+            </form>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>File</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                        <th>Payment</th>
+                        <th>Date</th>
+                        <th>Update</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (let order of orders) { %>
+                        <tr>
+                            <td>
+                                <%= order.user?.username || 'N/A' %>
+                            </td>
+                            <td><a href="/uploads/<%= order.uploaded_file %>" target="_blank" class="file-link">View
+                                    File</a></td>
+                            <td>₹<%= order.price %>
+                            </td>
+                            <td>
+                                <%= order.status %>
+                            </td>
+                            <td>
+                                <%= order.payment_status %>
+                            </td>
+                            <td>
+                                <%= order.createdAt.toDateString() %>
+                            </td>
+                            <td>
+                                <form action="/admin/update-status/<%= order._id %>" method="POST">
+                                    <select name="status" class="status-select">
+                                        <option value="Pending" <%=order.status==='Pending' ? 'selected' : '' %>>Pending
+                                        </option>
+                                        <option value="Processing" <%=order.status==='Processing' ? 'selected' : '' %>
+                                            >Processing</option>
+                                        <option value="Printed" <%=order.status==='Printed' ? 'selected' : '' %>>Printed
+                                        </option>
+                                        <option value="Dispatched" <%=order.status==='Dispatched' ? 'selected' : '' %>
+                                            >Dispatched</option>
+                                        <option value="Completed" <%=order.status==='Completed' ? 'selected' : '' %>
+                                            >Completed</option>
+                                    </select>
+                                    <button type="submit" class="update-btn">Update</button>
+                                </form>
+                            </td>
+                        </tr>
+                        <% } %>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ✅ Key Metrics -->
+        <h3>Key Metrics</h3>
+        <div class="metrics">
+            <div class="metric">
+                <h4>Total Revenue</h4>
+                <p>₹<%= analytics.totalRevenue %>
+                </p>
+            </div>
+            <div class="metric">
+                <h4>Total Orders</h4>
+                <p>
+                    <%= analytics.totalOrders %>
+                </p>
+            </div>
+            <div class="metric">
+                <h4>Pending Orders</h4>
+                <p>
+                    <%= analytics.pendingOrders %>
+                </p>
+            </div>
+            <div class="metric">
+                <h4>Completed Orders</h4>
+                <p>
+                    <%= analytics.completedOrders %>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

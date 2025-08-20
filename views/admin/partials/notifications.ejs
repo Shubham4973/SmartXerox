@@ -1,0 +1,13 @@
+<div class="admin-notification-panel">
+    <h4>🔔 Notifications</h4>
+    <ul id="notificationList">
+        <% notifications.forEach(note=> { %>
+            <li class="<%= note.isRead ? 'read' : 'unread' %>">
+                <%= note.message %>
+                    <small>
+                        <%= note.createdAt.toLocaleString() %>
+                    </small>
+            </li>
+            <% }) %>
+    </ul>
+</div>

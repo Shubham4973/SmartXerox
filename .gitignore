@@ -1,0 +1,47 @@
+# Node.js dependencies
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Coverage reports
+coverage/
+*.lcov
+
+# Debug / VSCode / IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build outputs
+dist/
+build/
+.cache/
+.next/
+out/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Optional lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml

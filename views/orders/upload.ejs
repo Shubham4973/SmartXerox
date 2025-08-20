@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Document - SmartXerox</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/upload.css">
+
+</head>
+
+<body>
+
+    <div class="upload-wrapper">
+        <div class="upload-container">
+            <!-- Logo centered on form -->
+            <div class="logo">
+                <img src="/images/logo.svg" alt="SmartXerox Logo">
+            </div>
+
+            <!-- Welcome message -->
+            <div class="welcome-msg">
+                <h3>
+                    Welcome,
+                    <% if (user && user.username) { %>
+                        <%= user.username %>
+                            <% } else { %>
+                                Guest
+                                <% } %> 👋
+                </h3>
+                <p>Submit your document below to place your print order.</p>
+            </div>
+
+            <form method="POST" action="/upload" enctype="multipart/form-data">
+                <% if (typeof error !=="undefined" ) { %>
+                    <div class="error-msg">
+                        <%= error %>
+                    </div>
+                    <% } %>
+
+                        <label for="document"><i class="fas fa-file-upload"></i> Upload File</label>
+                        <input type="file" name="document" required>
+
+                        <label for="copies"><i class="fas fa-copy"></i> Number of Copies</label>
+                        <input type="number" name="copies" min="1" value="1" required>
+
+                        <label for="color_mode"><i class="fas fa-palette"></i> Color Mode</label>
+                        <select name="color_mode" required>
+                            <option value="BW">Black & White</option>
+                            <option value="CL">Color</option>
+                            <option value="GREY">Greyscale</option>
+                            <option value="HD">High-Definition Color</option>
+                            <option value="DRAFT">Draft Mode (Ink Saver)</option>
+                            <option value="PHOTO">Photo Print</option>
+
+                        </select>
+
+                        <label for="page_size"><i class="fas fa-file-alt"></i> Page Size</label>
+                        <select name="page_size" required>
+                            <option value="A4">A4</option>
+                            <option value="A3">A3</option>
+                            <option value="A5">A5</option>
+                            <option value="Letter">Letter (8.5×11")</option>
+                            <option value="Legal">Legal (8.5×14")</option>
+                            <option value="Executive">Executive (7.25×10.5")</option>
+                            <option value="B5">B5 (6.93×9.84")</option>
+                            <option value="Tabloid">Tabloid (11×17")</option>
+
+                        </select>
+
+                        <label for="binding_option"><i class="fas fa-book"></i> Binding Option</label>
+                        <select name="binding_option" required>
+                            <option value="None">None</option>
+                            <option value="Stapled">Stapled</option>
+                            <option value="Spiral">Spiral</option>
+                            <option value="Hardbound">Hardbound</option>
+                            <option value="Softcover">Softcover</option>
+                            <option value="Thermal">Thermal Binding</option>
+                            <option value="Ring Binder">Ring Binder</option>
+                            <option value="Tape Binding">Tape Binding</option>
+                            <option value="Wire-O">Wire-O Binding</option>
+
+                        </select>
+
+                        <div class="button-group">
+                            <button type="submit" class="btn-primary">Submit</button>
+                            <a href="/dashboard" class="btn-secondary">Go to Dashboard</a>
+                        </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>

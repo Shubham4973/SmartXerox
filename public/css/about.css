@@ -1,0 +1,78 @@
+body {
+font-family: 'Segoe UI', sans-serif;
+background: #f9f9f9;
+margin: 0;
+color: #333;
+}
+
+.about-hero {
+background: linear-gradient(to right, #0074D9, #00c3ff);
+color: white;
+padding: 60px 20px;
+text-align: center;
+}
+
+.about-content h1 {
+font-size: 3rem;
+margin-bottom: 15px;
+}
+
+.about-content p {
+font-size: 1.2rem;
+max-width: 800px;
+margin: 0 auto;
+}
+
+.mission-section {
+padding: 40px 20px;
+text-align: center;
+}
+
+.mission-section h2 {
+font-size: 2rem;
+margin-bottom: 10px;
+}
+
+.features-section {
+background: white;
+padding: 40px 20px;
+}
+
+.features-section h2 {
+text-align: center;
+font-size: 2rem;
+margin-bottom: 30px;
+}
+
+.features-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+gap: 20px;
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.feature-card {
+background: #ffffff;
+padding: 20px;
+border-radius: 8px;
+box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+transform: translateY(-5px);
+}
+
+.feature-card h3 {
+margin-top: 0;
+color: #0074D9;
+}
+
+footer {
+text-align: center;
+padding: 20px;
+background: #eee;
+color: #555;
+margin-top: 30px;
+}

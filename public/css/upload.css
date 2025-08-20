@@ -1,0 +1,132 @@
+/* Upload Page Styles Only */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f4f8;
+    margin: 0;
+    padding: 0;
+}
+
+.upload-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+}
+
+.upload-container {
+    background: #ffffff;
+    max-width: 720px;
+    width: 100%;
+    padding: 50px 60px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.logo {
+    margin-bottom: 30px;
+}
+
+.logo img {
+    height: 70px;
+}
+
+.welcome-msg h3 {
+    font-size: 28px;
+    color: #1e3a8a;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.welcome-msg p {
+    color: #6b7280;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+form {
+    text-align: left;
+}
+
+label {
+    font-weight: 600;
+    color: #1f2937;
+    display: block;
+    margin-bottom: 8px;
+    margin-top: 22px;
+    font-size: 17px;
+}
+
+input[type="file"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    font-size: 16px;
+    background-color: #f9fafb;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 35px;
+}
+
+.btn-primary {
+    background-color: #2563eb;
+    color: white;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 10px;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
+
+.btn-primary:hover {
+    background-color: #1e40af;
+}
+
+.btn-secondary {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.btn-secondary:hover {
+    text-decoration: underline;
+}
+
+.error-msg {
+    color: #dc2626;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .upload-container {
+        padding: 30px 24px;
+    }
+
+    .welcome-msg h3 {
+        font-size: 24px;
+    }
+
+    .welcome-msg p,
+    label,
+    input,
+    select,
+    .btn-primary,
+    .btn-secondary {
+        font-size: 15px;
+    }
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Your Dashboard - SmartXerox</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+
+<body>
+
+    <div class="navbar">
+        <img src="/images/logo.svg" alt="SmartXerox Logo">
+        <div class="user-actions">
+            <div class="username">
+                <%= user.username %>
+            </div>
+            <a href="/logout" class="logout-btn">Logout</a>
+        </div>
+    </div>
+
+    <div class="dashboard">
+        <h2>Hello, <%= user.username %> 👋</h2>
+        <p class="sub_heading">Here's a summary of your printing orders:</p>
+
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>File</th>
+                        <th>Copies</th>
+                        <th>Color</th>
+                        <th>Size</th>
+                        <th>Binding</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                        <th>Payment</th>
+                        <th>Pay Now</th> <!-- 👈 New Column -->
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (orders.length===0) { %>
+                        <tr>
+                            <td colspan="10" class="no-orders">No orders found.</td>
+                        </tr>
+                        <% } else { %>
+                            <% for (let order of orders) { %>
+                                <tr>
+                                    <td>
+                                        <a href="/uploads/<%= order.uploaded_file %>" target="_blank" class="file-link">
+                                            View File
+                                        </a>
+                                    </td>
+
+                                    <td>
+                                        <%= order.copies %>
+                                    </td>
+                                    <td>
+                                        <%= order.color_mode %>
+                                    </td>
+                                    <td>
+                                        <%= order.page_size %>
+                                    </td>
+                                    <td>
+                                        <%= order.binding_option %>
+                                    </td>
+                                    <td>₹<%= order.price %>
+                                    </td>
+                                    <td class="status">
+                                        <%= order.status %>
+                                    </td>
+                                    <td class="status">
+                                        <%= order.payment_status %>
+                                    </td>
+
+                                    <!-- ✅ Separated Action Column -->
+                                    <td>
+                                        <% if (order.payment_status==='Pending' ) { %>
+                                            <form method="POST"
+                                                action="/payment/create-checkout-session/<%= order._id %>"
+                                                style="display:inline;">
+                                                <button type="submit" class="pay-btn">Pay Now</button>
+                                            </form>
+                                            <form method="POST" action="/payment/cod/<%= order._id %>"
+                                                style="margin-top: 6px;">
+                                                <button type="submit" class="cod-btn">Choose COD</button>
+                                            </form>
+                                            <% } else { %>
+                                                <span style="color: #10b981;">—</span>
+                                                <% } %>
+                                    </td>
+
+                                    <td>
+                                        <%= order.createdAt.toDateString() %>
+                                    </td>
+                                </tr>
+                                <% } %>
+                                    <% } %>
+                </tbody>
+
+            </table>
+        </div>
+
+        <a class="action-btn" href="/upload">Place Another Order</a>
+    </div>
+
+</body>
+
+</html>
